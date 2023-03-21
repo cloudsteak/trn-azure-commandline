@@ -39,3 +39,62 @@ Ekkor ablakban megnyílik a bejelentkező felület, ahol be tudunk jelentkezni. 
 ```powershell
 Get-AzSubscription
 ```
+
+## Azure-Cli
+
+Az Azure elsőszámú, platform független parancssori eszköze. Ténylegesen minden platfomon futtatható: Windows, MacOS, Linux, Unix, Docker
+
+### Telepítés
+
+Az Azure-Cli telepítése az alábbi cikkből egyreűen elvégezhető: https://learn.microsoft.com/hu-hu/cli/azure/install-azure-cli
+
+Nézzünk néhány tipukus telepítési parancsot
+
+#### Windows
+
+- Telepítési cikk: https://learn.microsoft.com/hu-hu/cli/azure/install-azure-cli-windows?tabs=azure-cli
+- Telepítési állomány: https://aka.ms/installazurecliwindows
+
+#### MacOS
+
+- Telepítési cikk: https://learn.microsoft.com/hu-hu/cli/azure/install-azure-cli-macos
+- Telepítés:
+
+```zsh
+brew update && brew install azure-cli
+```
+
+#### Ubuntu Linux
+
+- Telepítési cikk: https://learn.microsoft.com/hu-hu/cli/azure/install-azure-cli-linux?pivots=apt
+- Telepítés:
+
+```bash
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+```
+
+### Azure-Cli verzió elennőrzése
+
+```bash
+az version
+```
+
+vagy
+
+```bash
+az -v
+```
+
+### Kapcsolódás Azure Tenant-hoz (illetve subscription-höz)
+
+```bash
+az login
+```
+
+Ekkor ablakban megnyílik a bejelentkező felület, ahol be tudunk jelentkezni. Ha sikerül, akkor az ablak bezáródik és visszatérünk a terminál ablakba.
+
+### Előfizetések listázása
+
+```powershell
+az account list -o table
+```
