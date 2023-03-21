@@ -1,12 +1,12 @@
-# Parancssori eszközök Azure-hoz
+## Parancssori eszközök Azure-hoz
+
+# Alapok
 
 Segédanyag a Gerilla Mentok Klub Azure szolgáltatások és megoldások a mindennapokban (6 hetes) képzéshez
 
 ## PowerShell
 
-### Ismerető
-
-A "hatalom kagyló" a Windows elsőszámű parancssori eszköze. Nagyon hasznos és minden Windows-os erőforrást kezelhetünk vele.
+A "hatalom kagyló", a Windows elsőszámű parancssori eszköze. Nagyon hasznos és minden Windows-os erőforrást kezelhetünk vele.
 
 Rengetek modul érhető el hozzá, többek között a számunkra érdekes Azure is.
 
@@ -73,7 +73,7 @@ brew update && brew install azure-cli
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 ```
 
-### Azure-Cli verzió elennőrzése
+### Azure-Cli verzió elenőrzése
 
 ```bash
 az version
@@ -97,4 +97,56 @@ Ekkor ablakban megnyílik a bejelentkező felület, ahol be tudunk jelentkezni. 
 
 ```powershell
 az account list -o table
+```
+
+## CloudShell
+
+A CloudShell az Azure portálon elérhető parancsori futtatókörnyezet. Cloudshell-ben mind PowerShell, mind Azure-Cli parancsokat is futtathatunk.
+
+![cloudshell01](/images/cloudshell01.png)
+
+![cloudshell02](/images/cloudshell02.png)
+
+# Parancsok több esetre
+
+## Alap dolgok
+
+- Erőforráscsoportok lekérdezése
+
+```powershell
+Get-AzResourceGroup
+```
+
+```bash
+az group list
+```
+
+- Virtuális hálózatok lekérdezése
+
+```powershell
+Get-AzVirtualNetwork
+```
+
+```bash
+az network vnet list
+```
+
+- Network Security Group lekérdezése
+
+```powershell
+Get-AzNetworkSecurityGroup
+```
+
+```bash
+az network nsg list
+```
+
+- Virtuálisgép lekérdezése
+
+```powershell
+Get-AzVM
+```
+
+```bash
+az vm list
 ```
