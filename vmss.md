@@ -33,4 +33,4 @@ az vmss scale --name sajátvmss --new-capacity 3 --resource-group erőforráscso
 ```
 
 
-[<< Vissza](./)
+[<< Vissza](README.md)
