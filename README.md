@@ -155,4 +155,5 @@ az vm list
 
 # Egyéb parancsok
 
+- [Virtuálisgép](vm.md)
 - [VMSS](vmss.md)
