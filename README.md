@@ -150,3 +150,9 @@ Get-AzVM
 ```bash
 az vm list
 ```
+
+
+
+# Egyéb parancsok
+
+- [VMSS](vmss.md)
