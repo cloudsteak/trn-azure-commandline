@@ -2,11 +2,11 @@
 
 ## Dokumentáció
 
-- PowerShell és Azure-Clidokumentáció: https://learn.microsoft.com/hu-hu/azure/virtual-machines/
+- PowerShell és Azure-Cli: https://learn.microsoft.com/hu-hu/azure/virtual-machines/
 
 ## Parancsok
 
-- VMSS lekérdezése
+- VM lekérdezése
 
 ```powershell
 Get-AzVm

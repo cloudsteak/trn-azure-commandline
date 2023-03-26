@@ -2,8 +2,8 @@
 
 ## Dokumentáció
 
-- PowerShell dokumentáció: https://learn.microsoft.com/hu-hu/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-manage-powershell
-- Azure-Cli dokumentáció: https://learn.microsoft.com/hu-hu/cli/azure/vmss?view=azure-cli-latest
+- PowerShell: https://learn.microsoft.com/hu-hu/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-manage-powershell
+- Azure-Cli: https://learn.microsoft.com/hu-hu/cli/azure/vmss?view=azure-cli-latest
 
 ## Parancsok
 
