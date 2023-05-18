@@ -159,3 +159,4 @@ az vm list
 - [Virtuális hálózat](vnet.md)
 - [Virtuálisgép](vm.md)
 - [VMSS](vmss.md)
+- [VPN](vpn.md)
