@@ -42,3 +42,5 @@ Windows-on Routing menuális beállítása:
 route add 10.10.0.0 MASK 255.255.0.0 172.0.0.1 -p
 ```
 
+
+[<< Vissza](README.md)
