@@ -33,6 +33,7 @@ New-AzVm `
 ```
 
 _Egyéb PowerShell esetén:_
+
 - `Get-Credential` parancs bekéri a felhasználóevet és a hozzá tartozó jelszót. Ezt teljesen biztonságosan kezeli.
 
 ```bash
@@ -49,10 +50,10 @@ az vm create \
 ```
 
 _Egyéb Azure-Cli esetén:_
+
 - `--no-wait` kapcsoló hatására a parancs a háttérben fut.
 - `--generate-ssh-keys` generál saját ssh kulcsot, ami a `~/.ssh` mappába generál a parancs
 - Linux gépbe való bejelentkezés: `ssh -i ~/.ssh/id_rsa localadmin@gép_ip_címe`
 - Port nyitása létező VM-hez: `az vm open-port -g 'erőforráscsoport' -n 'vmneve' --port 80,443 --priority 300`
-
 
 [<< Vissza](README.md)
