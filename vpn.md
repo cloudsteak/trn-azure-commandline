@@ -1,5 +1,7 @@
 # VPN-hez kapcsolódó scriptek és parancsok
 
+[![Cloud Shell indítása](https://learn.microsoft.com/azure/cloud-shell/media/embed-cloud-shell/launch-cloud-shell-1.png)](https://shell.azure.com)
+
 ## Point-To-Site VPN
 
 Dokumentáció: https://learn.microsoft.com/hu-hu/azure/vpn-gateway/vpn-gateway-howto-point-to-site-resource-manager-portal

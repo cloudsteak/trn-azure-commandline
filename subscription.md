@@ -1,5 +1,7 @@
 # Régió, Előfizetés, Erőforráscsoport parancsok
 
+[![Cloud Shell indítása](https://learn.microsoft.com/azure/cloud-shell/media/embed-cloud-shell/launch-cloud-shell-1.png)](https://shell.azure.com)
+
 ## Parancsok
 
 - Aktuális előfizetés
