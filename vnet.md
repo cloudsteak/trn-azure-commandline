@@ -1,5 +1,7 @@
 # Virtuális hálózat parancsok
 
+- PowerShell Cloud Shell indítása: [![PowerShell Cloud Shell indítása](https://learn.microsoft.com/azure/cloud-shell/media/embed-cloud-shell/launch-cloud-shell-1.png)](https://shell.azure.com/powershell)
+- Bash Cloud Shell indítása: [![Bash Cloud Shell indítása](https://learn.microsoft.com/azure/cloud-shell/media/embed-cloud-shell/launch-cloud-shell-1.png)](https://shell.azure.com/bash)
 ## Dokumentáció
 
 - PowerShell: https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
