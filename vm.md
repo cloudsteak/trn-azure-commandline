@@ -1,7 +1,6 @@
 # VM parancsok
 
-- PowerShell Cloud Shell indítása: [![PowerShell Cloud Shell indítása](https://learn.microsoft.com/azure/cloud-shell/media/embed-cloud-shell/launch-cloud-shell-1.png)](https://shell.azure.com/powershell)
-- Bash Cloud Shell indítása: [![Bash Cloud Shell indítása](https://learn.microsoft.com/azure/cloud-shell/media/embed-cloud-shell/launch-cloud-shell-1.png)](https://shell.azure.com/bash)
+[![Cloud Shell indítása](https://learn.microsoft.com/azure/cloud-shell/media/embed-cloud-shell/launch-cloud-shell-1.png)](https://shell.azure.com)
 ## Dokumentáció
 
 - PowerShell és Azure-Cli: https://learn.microsoft.com/hu-hu/azure/virtual-machines/
