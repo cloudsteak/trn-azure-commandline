@@ -34,6 +34,8 @@ $vnet = @{
     AddressPrefix = '10.0.0.0/16'
 }
 
+$virtualNetwork = New-AzVirtualNetwork @vnet
+
 $subnetfe = @{
     Name = 'frontend'
     VirtualNetwork = $virtualNetwork
