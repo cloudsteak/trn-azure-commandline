@@ -25,7 +25,7 @@ az vmss list -o table
 
 ```powershell
 # Változók definiálása
-$resourceGroupName = "mentorklub2023"
+$resourceGroupName = "mentorklub"
 $uniqueId = Get-Random
 $scaleSetName = ("$uniqueId" + "-vmss")
 $location = "North Europe"
@@ -105,11 +105,11 @@ $vmssConfig = New-AzVmssConfig `
 # Saját képfájl hivatkozás
 Set-AzVmssStorageProfile $vmssConfig `
   -OsDiskCreateOption "FromImage" `
-  -ImageReferenceId "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub2023/providers/Microsoft.Compute/galleries/CloudSteak/images/Ubuntu20.04-Apache2"
+  -ImageReferenceId "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub/providers/Microsoft.Compute/galleries/CloudSteak/images/Ubuntu20.04-Apache2"
 
 
 # Hálózati beállítás
-$vnet = Get-AzVirtualNetwork -Name "mentor-net" -ResourceGroupName $resourceGroupName;
+$vnet = Get-AzVirtualNetwork -Name "mentor-vnet" -ResourceGroupName $resourceGroupName;
 $subnetId = ($vnet.Subnets|where{$_.Name -eq "frontend"}).Id ;
 $ipCfg = New-AzVmssIpConfig -Name "ipConfig" -SubnetId $subnetId -LoadBalancerBackendAddressPoolsId $lb.BackendAddressPools[0].Id -Primary;
 Add-AzVmssNetworkInterfaceConfiguration -VirtualMachineScaleSet $vmssConfig -Name "network-main" -Primary $True -IPConfiguration $IPCfg
@@ -125,7 +125,7 @@ New-AzVmss `
   -Name $scaleSetName `
   -VirtualMachineScaleSet $vmssConfig
 
-Write-Host "VMSS elérése: http://vmss$uniqueId.northeurope.cloudapp.azure.com/hostname.html"
+Write-Host "VMSS elérése: http://vmss$uniqueId.swedencentral.cloudapp.azure.com/hostname.html"
 
 ```
 
