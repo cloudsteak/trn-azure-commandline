@@ -25,10 +25,10 @@ az vmss list -o table
 
 ```powershell
 # Változók definiálása
-$resourceGroupName = "mentorklub2023"
+$resourceGroupName = "mentorklub"
 $uniqueId = Get-Random
 $scaleSetName = ("$uniqueId" + "-vmss")
-$location = "North Europe"
+$location = "Sweden Central"
 ```
 
 2. Felhasználói fiók adatai.
@@ -71,13 +71,13 @@ $rule = New-AzLoadBalancerRuleConfig -Name ("$uniqueId" + "-lb-rule") -FrontendI
 # Bejövő NAT szabály
 $natRuleV2HTTP = New-AzLoadBalancerInboundNatRuleConfig -Name ("$uniqueId" + "-nat-HTTP") -Protocol "Tcp" `
     -FrontendIpConfiguration $feipCfg `
-    -FrontendPortRangeStart 50000 -FrontendPortRangeEnd 50050 `
-    -BackendAddressPool $bepool -IdleTimeoutInMinutes 30 -BackendPort 80
+    -FrontendPortRangeStart 45000 -FrontendPortRangeEnd 45050 `
+    -BackendAddressPool $bepool -IdleTimeoutInMinutes 10 -BackendPort 80
 
 $natRuleV2SSH = New-AzLoadBalancerInboundNatRuleConfig -Name ("$uniqueId" + "-nat-SSH") -Protocol "Tcp" `
     -FrontendIpConfiguration $feipCfg `
-    -FrontendPortRangeStart 51000 -FrontendPortRangeEnd 51050 `
-    -BackendAddressPool $bepool -IdleTimeoutInMinutes 30 -BackendPort 22
+    -FrontendPortRangeStart 45100 -FrontendPortRangeEnd 45150 `
+    -BackendAddressPool $bepool -IdleTimeoutInMinutes 10 -BackendPort 22
 
 ## Terheléselosztó a korábbi elemekkel és paraméterekkel
 $lb = New-AzLoadBalancer -Name ("$uniqueId" + "-lb-vmss") -ResourceGroupName $resourceGroupName -Location $location `
@@ -99,17 +99,19 @@ $vmssConfig = New-AzVmssConfig `
    -OrchestrationMode Uniform `
    -SkuName "Standard_B1ls" `
    -UpgradePolicyMode "Automatic" `
+   -SecurityType "TrustedLaunch" `
    -Tag @{vmss="$uniqueId"}
 
 
 # Saját képfájl hivatkozás
 Set-AzVmssStorageProfile $vmssConfig `
   -OsDiskCreateOption "FromImage" `
-  -ImageReferenceId "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub2023/providers/Microsoft.Compute/galleries/CloudSteak/images/Ubuntu20.04-Apache2"
+  -ImageReferenceId "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub/providers/Microsoft.Compute/galleries/MentorKlub/images/Ubuntu22-Apache2-TestPage/versions/2024.02.25" 
+
 
 
 # Hálózati beállítás
-$vnet = Get-AzVirtualNetwork -Name "mentor-net" -ResourceGroupName $resourceGroupName;
+$vnet = Get-AzVirtualNetwork -Name "mentor-vnet" -ResourceGroupName $resourceGroupName;
 $subnetId = ($vnet.Subnets|where{$_.Name -eq "frontend"}).Id ;
 $ipCfg = New-AzVmssIpConfig -Name "ipConfig" -SubnetId $subnetId -LoadBalancerBackendAddressPoolsId $lb.BackendAddressPools[0].Id -Primary;
 Add-AzVmssNetworkInterfaceConfiguration -VirtualMachineScaleSet $vmssConfig -Name "network-main" -Primary $True -IPConfiguration $IPCfg
@@ -125,7 +127,7 @@ New-AzVmss `
   -Name $scaleSetName `
   -VirtualMachineScaleSet $vmssConfig
 
-Write-Host "VMSS elérése: http://vmss$uniqueId.northeurope.cloudapp.azure.com/hostname.html"
+Write-Host "VMSS elérése: http://vmss$uniqueId.swedencentral.cloudapp.azure.com"
 
 ```
 
@@ -143,15 +145,15 @@ Get-AzResource -TagValue "vmss egyedi azonosítója a fenti scriptből" | Remove
 
 ```powershell
 # VMSS letárolása
-$vmss = Get-AzVmss -ResourceGroupName "erőforráscsoportnév" -VMScaleSetName "sajátvmss"
+$vmss = Get-AzVmss -ResourceGroupName "mentorklub" -VMScaleSetName "sajátvmss"
 
 # Kívánt VM számosság beállítása
 $vmss.sku.capacity = 3
-Update-AzVmss -ResourceGroupName "erőforráscsoportnév" -Name "sajátvmss" -VirtualMachineScaleSet $vmss
+Update-AzVmss -ResourceGroupName "mentorklub" -Name "sajátvmss" -VirtualMachineScaleSet $vmss
 ```
 
 ```bash
-az vmss scale --name sajátvmss --new-capacity 3 --resource-group erőforráscsoportnév --verbose
+az vmss scale --name sajátvmss --new-capacity 3 --resource-group mentorklub --verbose
 ```
 
 [<< Vissza](README.md)

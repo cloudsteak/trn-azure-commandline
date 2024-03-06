@@ -10,6 +10,10 @@
 Get-AzContext
 ```
 
+```powershell
+Get-AzSubscription
+```
+
 ```bash
 az account list -o table
 ```
