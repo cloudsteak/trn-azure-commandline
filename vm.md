@@ -57,7 +57,7 @@ Linux VM létrehozása, SSH kulcs generálással és saját hálózattal
 
 ```bash
 eroforrascsoport='mentorklub'
-regio='Sweden Central'
+regio='swedencentral'
 vmneve='LinuxServer01'
 vmmerete='Standard_B1s'
 ```
