@@ -182,5 +182,6 @@ _Egyéb Azure-Cli esetén:_
 - `--generate-ssh-keys` generál saját ssh kulcsot, amit a `~/.ssh` mappába generál a parancs
 - Linux gépbe való bejelentkezés: `ssh -i ~/.ssh/id_rsa localadmin@gép_ip_címe`
 - Port nyitása létező VM-hez: `az vm open-port -g 'erőforráscsoport' -n 'vmneve' --port 80,443 --priority 300`
+- Ubuntu verzió ellenőrzése: `lsb_release -a`
 
 [<< Vissza](README.md)
