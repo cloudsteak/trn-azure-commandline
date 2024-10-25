@@ -71,7 +71,7 @@ az group create -l $regio -n $eroforrascsoport
 az vm create \
   --resource-group $eroforrascsoport \
   --name $vmneve \
-  --image Ubuntu2204 \
+  --image Ubuntu2404 \
   --vnet-name "$vmneve-net" \
   --subnet 'frontend' \
   --nsg "$vmneve-nsg" \
