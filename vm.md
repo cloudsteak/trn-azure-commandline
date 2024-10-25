@@ -86,16 +86,29 @@ az vm create \
 NSG nélküli gépek, létező VNET-be
 
 ```bash
+eroforrascsoport='mentorklub'
+regio='swedencentral'
+vmneve='LinuxServer02'
+vmmerete='Standard_B1s'
+vnet='mentor-vnet'
+subnet='frontend'
+```
+
+```bash
+az group create -l $regio -n $eroforrascsoport
+```
+
+```bash
 az vm create \
-  --resource-group 'mentorklub' \
-  --name 'LinuxServer02' \
+  --resource-group $eroforrascsoport \
+  --name $vmneve \
   --image UbuntuLTS \
-  --vnet-name 'mentor-vnet' \
-  --subnet 'frontend' \
+  --vnet-name $vnet \
+  --subnet $subnet \
   --nsg '' \
   --admin-username 'localadmin' \
   --generate-ssh-keys \
-  --size 'Standard_B1s' \
+  --size $vmmerete \
   --public-ip-sku Standard
 ```
 
@@ -105,35 +118,61 @@ az vm create \
 **Linux + Apache2**
 
 ```bash
+eroforrascsoport='mentorklub'
+regio='swedencentral'
+vmneve='WebServer01'
+vmmerete='Standard_B1s'
+vnet='mentor-vnet'
+subnet='frontend'
+```
+
+```bash
+az group create -l $regio -n $eroforrascsoport
+```
+
+```bash
 az vm create \
-  --resource-group 'mentorklub' \
-  --name 'WebServer01' \
-  --vnet-name 'mentor-vnet' \
-  --subnet 'frontend' \
+  --resource-group $eroforrascsoport \
+  --name $vmneve \
+  --vnet-name $vnet \
+  --subnet $subnet \
   --nsg '' \
   --admin-username 'localadmin' \
   --generate-ssh-keys \
-  --size 'Standard_B1s' \
+  --size $vmmerete \
   --public-ip-sku Standard \
   --security-type TrustedLaunch \
-  --image "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub/providers/Microsoft.Compute/galleries/MentorKlub/images/Ubuntu22-Apache2-TestPage/versions/2024.02.25"
+  --image "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub/providers/Microsoft.Compute/galleries/MentorKlub/images/Ubuntu24-Apache2-TesztOldal/versions/2024.10.15"
 ```
 
 **Linux + Webszerver + SQL kapcsolat**
 
 ```bash
+eroforrascsoport='mentorklub'
+regio='swedencentral'
+vmneve='WebServer02'
+vmmerete='Standard_B1s'
+vnet='mentor-vnet'
+subnet='frontend'
+```
+
+```bash
+az group create -l $regio -n $eroforrascsoport
+```
+
+```bash
 az vm create \
-  --resource-group 'mentorklub' \
-  --name 'WebServer02' \
-  --vnet-name 'mentor-vnet' \
-  --subnet 'frontend' \
+  --resource-group $eroforrascsoport \
+  --name $vmneve \
+  --vnet-name $vnet \
+  --subnet $subnet \
   --nsg '' \
   --admin-username 'localadmin' \
   --generate-ssh-keys \
-  --size 'Standard_B1s' \
+  --size $vmmerete \
   --public-ip-sku Standard \
   --security-type TrustedLaunch \
-  --image "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub/providers/Microsoft.Compute/galleries/MentorKlub/images/Ubuntu22-WebApp-SQL-Connection/versions/2024.02.25"
+  --image "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub/providers/Microsoft.Compute/galleries/MentorKlub/images/Ubuntu24-WebApp-SQL-Kapcsolat/versions/2024.10.15"
 ```
 
 
