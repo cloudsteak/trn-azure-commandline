@@ -102,7 +102,7 @@ az group create -l $regio -n $eroforrascsoport
 az vm create \
   --resource-group $eroforrascsoport \
   --name $vmneve \
-  --image UbuntuLTS \
+  --image Ubuntu2404 \
   --vnet-name $vnet \
   --subnet $subnet \
   --nsg '' \
