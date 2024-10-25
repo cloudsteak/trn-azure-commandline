@@ -59,7 +59,7 @@ Linux VM létrehozása, SSH kulcs generálással és saját hálózattal
 eroforrascsoport='mentorklub'
 regio='swedencentral'
 vmneve='LinuxServer01'
-vmmerete='Standard_B1s'
+vmmerete='Standard_DS1_v2'
 ```
 
 ```bash
@@ -89,7 +89,7 @@ NSG nélküli gépek, létező VNET-be
 eroforrascsoport='mentorklub'
 regio='swedencentral'
 vmneve='LinuxServer02'
-vmmerete='Standard_B1s'
+vmmerete='Standard_DS1_v2'
 vnet='mentor-vnet'
 subnet='frontend'
 ```
@@ -121,7 +121,7 @@ az vm create \
 eroforrascsoport='mentorklub'
 regio='swedencentral'
 vmneve='WebServer01'
-vmmerete='Standard_B1s'
+vmmerete='Standard_DS1_v2'
 vnet='mentor-vnet'
 subnet='frontend'
 ```
@@ -151,7 +151,7 @@ az vm create \
 eroforrascsoport='mentorklub'
 regio='swedencentral'
 vmneve='WebServer02'
-vmmerete='Standard_B1s'
+vmmerete='Standard_DS1_v2'
 vnet='mentor-vnet'
 subnet='frontend'
 ```
