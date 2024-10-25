@@ -27,7 +27,7 @@ az vm list -o table
 $eroforrascsoport='mentorklub'
 $regio='Sweden Central'
 $vmneve='WinServer01'
-$vmmerete='Standard_B1s'
+$vmmerete='Standard_D2s_v3'
 ```
 
 ```powershell
