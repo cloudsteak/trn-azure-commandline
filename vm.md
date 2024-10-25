@@ -43,7 +43,7 @@ New-AzVm `
     -SubnetName 'frontend' `
     -SecurityGroupName "$vmneve-nsg" `
     -PublicIpAddressName "$vmneve-pip" `
-    -Size $vmmerete`
+    -Size $vmmerete `
     -OpenPorts 80,443,3389 `
     -Credential (Get-Credential)
 ```
