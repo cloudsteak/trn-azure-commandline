@@ -24,17 +24,26 @@ az vm list -o table
 - Teljesen önálló VM létrehozása
 
 ```powershell
+$eroforrascsoport='mentorklub'
+$regio='Sweden Central'
 $vmneve='WinServer01'
+$vmmerete='Standard_D2s_v3'
+```
 
+```powershell
+New-AzResourceGroup -Location $regio -Name $eroforrascsoport
+```
+
+```powershell
 New-AzVm `
-    -ResourceGroupName 'mentorklub' `
+    -ResourceGroupName $eroforrascsoport `
     -Name $vmneve `
-    -Location 'Sweden Central' `
+    -Location $regio `
     -VirtualNetworkName "$vmneve-vnet" `
     -SubnetName 'frontend' `
     -SecurityGroupName "$vmneve-nsg" `
     -PublicIpAddressName "$vmneve-pip" `
-    -Size 'Standard_B1s'`
+    -Size $vmmerete `
     -OpenPorts 80,443,3389 `
     -Credential (Get-Credential)
 ```
@@ -47,14 +56,22 @@ _Egyéb PowerShell esetén:_
 Linux VM létrehozása, SSH kulcs generálással és saját hálózattal
 
 ```bash
+eroforrascsoport='mentorklub'
+regio='swedencentral'
 vmneve='LinuxServer01'
+vmmerete='Standard_D2s_v3'
 ```
 
 ```bash
+az group create -l $regio -n $eroforrascsoport
+```
+
+
+```bash
 az vm create \
-  --resource-group 'mentorklub' \
+  --resource-group $eroforrascsoport \
   --name $vmneve \
-  --image Ubuntu2204 \
+  --image Ubuntu2404 \
   --vnet-name "$vmneve-net" \
   --subnet 'frontend' \
   --nsg "$vmneve-nsg" \
@@ -62,23 +79,36 @@ az vm create \
   --public-ip-address "$vmneve-pip" \
   --admin-username 'localadmin' \
   --generate-ssh-keys \
-  --size 'Standard_B1s' \
+  --size $vmmerete \
   --public-ip-sku Standard
 ```
 
 NSG nélküli gépek, létező VNET-be
 
 ```bash
+eroforrascsoport='mentorklub'
+regio='swedencentral'
+vmneve='LinuxServer02'
+vmmerete='Standard_D2s_v3'
+vnet='mentor-vnet'
+subnet='frontend'
+```
+
+```bash
+az group create -l $regio -n $eroforrascsoport
+```
+
+```bash
 az vm create \
-  --resource-group 'mentorklub' \
-  --name 'LinuxServer02' \
-  --image UbuntuLTS \
-  --vnet-name 'mentor-vnet' \
-  --subnet 'frontend' \
+  --resource-group $eroforrascsoport \
+  --name $vmneve \
+  --image Ubuntu2404 \
+  --vnet-name $vnet \
+  --subnet $subnet \
   --nsg '' \
   --admin-username 'localadmin' \
   --generate-ssh-keys \
-  --size 'Standard_B1s' \
+  --size $vmmerete \
   --public-ip-sku Standard
 ```
 
@@ -88,35 +118,61 @@ az vm create \
 **Linux + Apache2**
 
 ```bash
+eroforrascsoport='mentorklub'
+regio='swedencentral'
+vmneve='WebServer01'
+vmmerete='Standard_D2s_v3'
+vnet='mentor-vnet'
+subnet='frontend'
+```
+
+```bash
+az group create -l $regio -n $eroforrascsoport
+```
+
+```bash
 az vm create \
-  --resource-group 'mentorklub' \
-  --name 'WebServer01' \
-  --vnet-name 'mentor-vnet' \
-  --subnet 'frontend' \
+  --resource-group $eroforrascsoport \
+  --name $vmneve \
+  --vnet-name $vnet \
+  --subnet $subnet \
   --nsg '' \
   --admin-username 'localadmin' \
   --generate-ssh-keys \
-  --size 'Standard_B1s' \
+  --size $vmmerete \
   --public-ip-sku Standard \
   --security-type TrustedLaunch \
-  --image "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub/providers/Microsoft.Compute/galleries/MentorKlub/images/Ubuntu22-Apache2-TestPage/versions/2024.02.25"
+  --image "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub/providers/Microsoft.Compute/galleries/MentorKlub/images/Ubuntu24-Apache2-TesztOldal/versions/2024.10.15"
 ```
 
 **Linux + Webszerver + SQL kapcsolat**
 
 ```bash
+eroforrascsoport='mentorklub'
+regio='swedencentral'
+vmneve='WebServer02'
+vmmerete='Standard_D2s_v3'
+vnet='mentor-vnet'
+subnet='frontend'
+```
+
+```bash
+az group create -l $regio -n $eroforrascsoport
+```
+
+```bash
 az vm create \
-  --resource-group 'mentorklub' \
-  --name 'WebServer02' \
-  --vnet-name 'mentor-vnet' \
-  --subnet 'frontend' \
+  --resource-group $eroforrascsoport \
+  --name $vmneve \
+  --vnet-name $vnet \
+  --subnet $subnet \
   --nsg '' \
   --admin-username 'localadmin' \
   --generate-ssh-keys \
-  --size 'Standard_B1s' \
+  --size $vmmerete \
   --public-ip-sku Standard \
   --security-type TrustedLaunch \
-  --image "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub/providers/Microsoft.Compute/galleries/MentorKlub/images/Ubuntu22-WebApp-SQL-Connection/versions/2024.02.25"
+  --image "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub/providers/Microsoft.Compute/galleries/MentorKlub/images/Ubuntu24-WebApp-SQL-Kapcsolat/versions/2024.10.15"
 ```
 
 
@@ -126,5 +182,6 @@ _Egyéb Azure-Cli esetén:_
 - `--generate-ssh-keys` generál saját ssh kulcsot, amit a `~/.ssh` mappába generál a parancs
 - Linux gépbe való bejelentkezés: `ssh -i ~/.ssh/id_rsa localadmin@gép_ip_címe`
 - Port nyitása létező VM-hez: `az vm open-port -g 'erőforráscsoport' -n 'vmneve' --port 80,443 --priority 300`
+- Ubuntu verzió ellenőrzése: `lsb_release -a`
 
 [<< Vissza](README.md)
