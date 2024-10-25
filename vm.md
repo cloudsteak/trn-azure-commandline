@@ -24,17 +24,26 @@ az vm list -o table
 - Teljesen önálló VM létrehozása
 
 ```powershell
+$eroforrascsoport='mentorklub'
+$regio='Sweden Central'
 $vmneve='WinServer01'
+$vmmerete='Standard_B1s'
+```
 
+```powershell
+New-AzResourceGroup -Location $regio -Name $eroforrascsoport
+```
+
+```powershell
 New-AzVm `
-    -ResourceGroupName 'mentorklub' `
+    -ResourceGroupName $eroforrascsoport `
     -Name $vmneve `
-    -Location 'Sweden Central' `
+    -Location $regio `
     -VirtualNetworkName "$vmneve-vnet" `
     -SubnetName 'frontend' `
     -SecurityGroupName "$vmneve-nsg" `
     -PublicIpAddressName "$vmneve-pip" `
-    -Size 'Standard_B1s'`
+    -Size $vmmerete`
     -OpenPorts 80,443,3389 `
     -Credential (Get-Credential)
 ```
@@ -47,12 +56,20 @@ _Egyéb PowerShell esetén:_
 Linux VM létrehozása, SSH kulcs generálással és saját hálózattal
 
 ```bash
+eroforrascsoport='mentorklub'
+regio='Sweden Central'
 vmneve='LinuxServer01'
+vmmerete='Standard_B1s'
 ```
 
 ```bash
+az group create -l $regio -n $eroforrascsoport
+```
+
+
+```bash
 az vm create \
-  --resource-group 'mentorklub' \
+  --resource-group $eroforrascsoport \
   --name $vmneve \
   --image Ubuntu2204 \
   --vnet-name "$vmneve-net" \
@@ -62,7 +79,7 @@ az vm create \
   --public-ip-address "$vmneve-pip" \
   --admin-username 'localadmin' \
   --generate-ssh-keys \
-  --size 'Standard_B1s' \
+  --size $vmmerete \
   --public-ip-sku Standard
 ```
 
