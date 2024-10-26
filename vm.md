@@ -1,6 +1,7 @@
 # VM parancsok
 
 [![Cloud Shell indítása](https://learn.microsoft.com/azure/cloud-shell/media/embed-cloud-shell/launch-cloud-shell-1.png)](https://shell.azure.com)
+
 ## Dokumentáció
 
 - PowerShell és Azure-Cli: https://learn.microsoft.com/hu-hu/azure/virtual-machines/
@@ -49,6 +50,7 @@ New-AzVm `
 ```
 
 _Egyéb PowerShell esetén:_
+
 - `Get-Credential` parancs bekéri a felhasználóevet és a hozzá tartozó jelszót. Ezt teljesen biztonságosan kezeli.
 
 **Azure-CLi**
@@ -65,7 +67,6 @@ vmmerete='Standard_D2s_v3'
 ```bash
 az group create -l $regio -n $eroforrascsoport
 ```
-
 
 ```bash
 az vm create \
@@ -111,7 +112,6 @@ az vm create \
   --size $vmmerete \
   --public-ip-sku Standard
 ```
-
 
 - VM létrehozás saját képfájlból
 
@@ -174,7 +174,6 @@ az vm create \
   --security-type TrustedLaunch \
   --image "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub/providers/Microsoft.Compute/galleries/MentorKlub/images/Ubuntu24-WebApp-SQL-Kapcsolat/versions/2024.10.15"
 ```
-
 
 _Egyéb Azure-Cli esetén:_
 
