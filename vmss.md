@@ -106,7 +106,7 @@ $vmssConfig = New-AzVmssConfig `
 # Saját képfájl hivatkozás
 Set-AzVmssStorageProfile $vmssConfig `
   -OsDiskCreateOption "FromImage" `
-  -ImageReferenceId "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub/providers/Microsoft.Compute/galleries/MentorKlub/images/Ubuntu22-Apache2-TestPage/versions/2024.02.25" 
+  -ImageReferenceId "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub/providers/Microsoft.Compute/galleries/MentorKlub/images/Ubuntu24-Apache2-TesztOldal/versions/2024.10.15" 
 
 
 
