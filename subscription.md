@@ -4,6 +4,10 @@
 
 ## Parancsok
 
+- Telepítés és Bejelentkezés
+
+Ehhez a részhez a [README.md](README.md#Telepítés és bejelentkezés)
+
 - Aktuális előfizetés
 
 ```powershell
