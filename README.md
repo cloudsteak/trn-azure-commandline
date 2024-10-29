@@ -37,7 +37,7 @@ Connect-AzAccount
 _Megjegyzés:_ Ez megnyitja az alapértelmezett böngészőt, amiben elvégezhetjük a bejelentkezész az Azure előfizetésünkbe. A bejelentkezés sikeres, amikor a felületen látjuk az alábbi üzenetet: `Authentication complete. You can return to the application. Feel free to close this browser tab.`. Ezután visszatérhetünk a parancssori ablakba, ahol már futtathatjuk is a megfelelő parancsokat az előfizetésünkben.
 
 _Hibakezelés_: Ha az alábbi hibaüzenetet látjuk: `WARNING: Unable to acquire token for tenant 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' with error 'Authentication failed
-against tenant 4485c781-bdfc-4c45-89c1-aacda4b1b315. User interaction is required. This may be due to the conditional
+against tenant xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx. User interaction is required. This may be due to the conditional
 access policy settings such as multi-factor authentication (MFA). If you need to access subscriptions in that tenant,
 please rerun 'Connect-AzAccount' with additional parameter '-TenantId xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'.' Ez esetben a kapcsolódást az alábbiak szerint végezd el (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx értékét az [EntraID kezdőképernyőjén találod](https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Overview). Itt kerest a `Bérlő azonosítója` értéket):
 
