@@ -4,7 +4,7 @@
 
 ## Dokumentáció
 
-- PowerShell és Azure-Cli: https://learn.microsoft.com/hu-hu/azure/virtual-machines/
+- Virtuális gépek: https://learn.microsoft.com/hu-hu/azure/virtual-machines/
 
 ## Parancsok
 
@@ -25,7 +25,7 @@ az vm list -o table
 - Teljesen önálló VM létrehozása
 
 ```powershell
-$eroforrascsoport='mentorklub'
+$eroforrascsoport='mentorklub2025'
 $regio='Sweden Central'
 $vmneve='WinServer01'
 $vmmerete='Standard_D2s_v3'
@@ -41,7 +41,7 @@ New-AzVm `
     -Name $vmneve `
     -Location $regio `
     -VirtualNetworkName "$vmneve-vnet" `
-    -SubnetName 'frontend' `
+    -SubnetName 'alap' `
     -SecurityGroupName "$vmneve-nsg" `
     -PublicIpAddressName "$vmneve-pip" `
     -Size $vmmerete `
@@ -58,7 +58,7 @@ _Egyéb PowerShell esetén:_
 Linux VM létrehozása, SSH kulcs generálással és saját hálózattal
 
 ```bash
-eroforrascsoport='mentorklub'
+eroforrascsoport='mentorklub2025'
 regio='swedencentral'
 vmneve='LinuxServer01'
 vmmerete='Standard_D2s_v3'
@@ -74,7 +74,7 @@ az vm create \
   --name $vmneve \
   --image Ubuntu2404 \
   --vnet-name "$vmneve-net" \
-  --subnet 'frontend' \
+  --subnet 'alap' \
   --nsg "$vmneve-nsg" \
   --nsg-rule 'SSH' \
   --public-ip-address "$vmneve-pip" \
@@ -87,12 +87,12 @@ az vm create \
 NSG nélküli gépek, létező VNET-be
 
 ```bash
-eroforrascsoport='mentorklub'
+eroforrascsoport='mentorklub2025'
 regio='swedencentral'
 vmneve='LinuxServer02'
 vmmerete='Standard_D2s_v3'
-vnet='mentor-vnet'
-subnet='frontend'
+vnet='mentorklub2025-vnet'
+subnet='alap'
 ```
 
 ```bash
@@ -110,7 +110,8 @@ az vm create \
   --admin-username 'localadmin' \
   --generate-ssh-keys \
   --size $vmmerete \
-  --public-ip-sku Standard
+  --public-ip-sku Standard \
+  --no-wait
 ```
 
 - VM létrehozás saját képfájlból
@@ -118,12 +119,12 @@ az vm create \
 **Linux + Apache2**
 
 ```bash
-eroforrascsoport='mentorklub'
+eroforrascsoport='mentorklub2025'
 regio='swedencentral'
 vmneve='WebServer01'
 vmmerete='Standard_D2s_v3'
-vnet='mentor-vnet'
-subnet='frontend'
+vnet='mentorklub2025-vnet'
+subnet='alap'
 ```
 
 ```bash
@@ -142,18 +143,18 @@ az vm create \
   --size $vmmerete \
   --public-ip-sku Standard \
   --security-type TrustedLaunch \
-  --image "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub/providers/Microsoft.Compute/galleries/MentorKlub/images/Ubuntu24-Apache2-TesztOldal/versions/2024.10.15"
+  --image "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub-images/providers/Microsoft.Compute/galleries/MentorKlubImages/images/Ubuntu24-Apache2-TesztOldal/versions/2025.02.22"
 ```
 
 **Linux + Webszerver + SQL kapcsolat**
 
 ```bash
-eroforrascsoport='mentorklub'
+eroforrascsoport='mentorklub2025'
 regio='swedencentral'
 vmneve='WebServer02'
 vmmerete='Standard_D2s_v3'
-vnet='mentor-vnet'
-subnet='frontend'
+vnet='mentorklub2025-vnet'
+subnet='alap'
 ```
 
 ```bash
@@ -172,7 +173,7 @@ az vm create \
   --size $vmmerete \
   --public-ip-sku Standard \
   --security-type TrustedLaunch \
-  --image "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub/providers/Microsoft.Compute/galleries/MentorKlub/images/Ubuntu24-WebApp-SQL-Kapcsolat/versions/2024.10.15"
+  --image "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub-images/providers/Microsoft.Compute/galleries/MentorKlubImages/images/Ubuntu24-WebApp-SQL/versions/2025.02.22"
 ```
 
 _Egyéb Azure-Cli esetén:_
