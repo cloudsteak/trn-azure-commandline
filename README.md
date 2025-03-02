@@ -39,7 +39,7 @@ _Megjegyzés:_ Ez megnyitja az alapértelmezett böngészőt, amiben elvégezhet
 _Hibakezelés_: Ha az alábbi hibaüzenetet látjuk: `WARNING: Unable to acquire token for tenant 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' with error 'Authentication failed
 against tenant xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx. User interaction is required. This may be due to the conditional
 access policy settings such as multi-factor authentication (MFA). If you need to access subscriptions in that tenant,
-please rerun 'Connect-AzAccount' with additional parameter '-TenantId xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'.' Ez esetben a kapcsolódást az alábbiak szerint végezd el (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx értékét az [EntraID kezdőképernyőjén találod](https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Overview). Itt kerest a `Bérlő azonosítója` értéket):
+please rerun 'Connect-AzAccount' with additional parameter '-TenantId xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'.` Ez esetben a kapcsolódást az alábbiak szerint végezd el (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx értékét az [EntraID kezdőképernyőjén találod](https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Overview). Itt keresd a Bérlő azonosítója` értéket):
 
 ```powershell
 Connect-AzAccount -Tenant xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
