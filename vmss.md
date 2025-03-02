@@ -25,7 +25,7 @@ az vmss list -o table
 
 ```powershell
 # Változók definiálása
-$resourceGroupName = "mentorklub"
+$resourceGroupName = "mentorklub2025"
 $uniqueId = Get-Random
 $scaleSetName = ("$uniqueId" + "-vmss")
 $location = "Sweden Central"
@@ -97,7 +97,7 @@ $vmssConfig = New-AzVmssConfig `
    -Location $location `
    -SkuCapacity 2 `
    -OrchestrationMode Uniform `
-   -SkuName "Standard_B1ls" `
+   -SkuName "Standard_B1s" `
    -UpgradePolicyMode "Automatic" `
    -SecurityType "TrustedLaunch" `
    -Tag @{vmss="$uniqueId"}
@@ -106,7 +106,7 @@ $vmssConfig = New-AzVmssConfig `
 # Saját képfájl hivatkozás
 Set-AzVmssStorageProfile $vmssConfig `
   -OsDiskCreateOption "FromImage" `
-  -ImageReferenceId "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub/providers/Microsoft.Compute/galleries/MentorKlub/images/Ubuntu24-Apache2-TesztOldal/versions/2024.10.15" 
+  -ImageReferenceId "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub-images/providers/Microsoft.Compute/galleries/MentorKlubImages/images/Ubuntu24-Apache2-TesztOldal/versions/2025.02.22" 
 
 
 
@@ -145,15 +145,15 @@ Get-AzResource -TagValue "vmss egyedi azonosítója a fenti scriptből" | Remove
 
 ```powershell
 # VMSS letárolása
-$vmss = Get-AzVmss -ResourceGroupName "mentorklub" -VMScaleSetName "sajátvmss"
+$vmss = Get-AzVmss -ResourceGroupName "mentorklub2025" -VMScaleSetName "sajátvmss"
 
 # Kívánt VM számosság beállítása
 $vmss.sku.capacity = 3
-Update-AzVmss -ResourceGroupName "mentorklub" -Name "sajátvmss" -VirtualMachineScaleSet $vmss
+Update-AzVmss -ResourceGroupName "mentorklub2025" -Name "sajátvmss" -VirtualMachineScaleSet $vmss
 ```
 
 ```bash
-az vmss scale --name sajátvmss --new-capacity 3 --resource-group mentorklub --verbose
+az vmss scale --name sajátvmss --new-capacity 3 --resource-group mentorklub2025 --verbose
 ```
 
 [<< Vissza](README.md)
