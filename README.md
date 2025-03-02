@@ -167,6 +167,7 @@ az vm list
 # Egyéb parancsok
 
 - [Régió, Előfizetés, Erőforráscsoport](subscription.md)
+- [Tárfiók és fájlmegosztás](storage.md)
 - [Virtuális hálózat](vnet.md)
 - [Virtuálisgép](vm.md)
 - [VMSS](vmss.md)
