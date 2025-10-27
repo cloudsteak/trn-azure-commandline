@@ -103,10 +103,40 @@ $vmssConfig = New-AzVmssConfig `
    -Tag @{vmss="$uniqueId"}
 
 
-# Saját képfájl hivatkozás
+# Cloud-Init konfiguráció
+$cloudConfig = @'
+#cloud-config
+package_update: true
+package_upgrade: true
+packages:
+  - apache2
+
+write_files:
+  - path: /tmp/index.html.tpl
+    permissions: '0644'
+    content: |
+      <html><head><style>body{font-family: Verdana, Geneva, Tahoma, sans-serif;background-image: url('https://github.com/cloudsteak/azurestaticwebsite/blob/main/assets/images/wallpaper-2025-01.jpeg?raw=true');background-repeat: no-repeat;background-size: cover; background-position: center;color: white; text-align: center; padding-top: 1%;}</style></head><body><h1>Web:<br>__HOSTNAME__</h1></body></html>
+
+runcmd:
+  - systemctl disable --now nginx || true
+  - systemctl enable --now apache2
+  - bash -lc 'HOST=$(hostname); sed "s/__HOSTNAME__/$HOST/" /tmp/index.html.tpl > /var/www/html/index.html'
+  - chown www-data:www-data /var/www/html/index.html || true
+  - chmod 0644 /var/www/html/index.html
+'@
+
+$cloudConfigBase64 = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($cloudConfig))
+
+# VM Image és Cloud-Init beállítása
 Set-AzVmssStorageProfile $vmssConfig `
   -OsDiskCreateOption "FromImage" `
-  -ImageReferenceId "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub-images/providers/Microsoft.Compute/galleries/MentorKlubImages/images/Ubuntu24-Apache2-TesztOldal/versions/2025.02.22" 
+  -ImageReference @{
+    Publisher = "Canonical"
+    Offer = "0001-com-ubuntu-server-noble"
+    Sku = "24_04-lts-gen2"
+    Version = "latest"
+  } `
+  -CustomData $cloudConfigBase64
 
 
 
