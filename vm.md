@@ -28,7 +28,7 @@ az vm list -o table
 $eroforrascsoport='mentorklub2025'
 $regio='Sweden Central'
 $vmneve='WinServer01'
-$vmmerete='Standard_D2s_v3'
+$vmmerete='Standard_D2s_v5'
 ```
 
 ```powershell
@@ -61,7 +61,7 @@ Linux VM létrehozása, SSH kulcs generálással és saját hálózattal
 eroforrascsoport='mentorklub2025'
 regio='swedencentral'
 vmneve='LinuxServer01'
-vmmerete='Standard_D2s_v3'
+vmmerete='Standard_B1s'
 ```
 
 ```bash

@@ -62,4 +62,40 @@ New-AzResourceGroup -Location 'régió' -Name 'erőforráscsoport neve'
 az group create 'erőforráscsoport neve' --location 'régió'
 ```
 
+- Szűrés, egyedi lekérdezés
+
+```powershell
+Get-AzSubscription | Select-Object Name, Id
+```
+
+```bash
+az account list --query "[].{Name:name, Id:id}"
+```
+
+```powershell
+Get-AzContext -ListAvailable |
+    Where-Object { $_.Subscription.Name -like "*Azure*" } |
+    Select-Object @{
+        Name       = "Name"
+        Expression = { $_.Subscription.Name }
+    }, @{
+        Name       = "UserName"
+        Expression = { $_.Account.Id }
+    }
+```
+
+```bash
+az account list --query "[?contains(name,'Azure')].{Name:name, UserName:user.name}"
+```
+
+```powershell
+Get-AzVMSize -Location "swedencentral" |
+    Where-Object { $_.Name -like "Standard_D2s*" } |
+    Select-Object Name, NumberOfCores, MemoryInMB
+```
+
+```bash
+az vm list-sizes --location swedencentral --query "[?starts_with(name, 'Standard_D2s')].{Name:name, Cores:numberOfCores, Memory:memoryInMB}"
+```
+
 [<< Vissza](README.md)
