@@ -172,3 +172,4 @@ az vm list
 - [Virtuálisgép](vm.md)
 - [VMSS](vmss.md)
 - [VPN](vpn.md)
+- [Vegyes - ha szemezgetnél](miscellaneous.md)
