@@ -127,28 +127,25 @@ runcmd:
 
 $cloudConfigBase64 = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($cloudConfig))
 
-# VM Image és Cloud-Init beállítása
+# VM image beállítása (Gen2 Ubuntu 24.04 LTS) – TrustedLaunch kompatibilis
 Set-AzVmssStorageProfile $vmssConfig `
-  -OsDiskCreateOption "FromImage" `
-  -ImageReference @{
-    Publisher = "Canonical"
-    Offer = "0001-com-ubuntu-server-noble"
-    Sku = "24_04-lts-gen2"
-    Version = "latest"
-  } `
-  -CustomData $cloudConfigBase64
-
+  -OsDiskCreateOption FromImage `
+  -ImageReferencePublisher "Canonical" `
+  -ImageReferenceOffer "0001-com-ubuntu-server-noble" `
+  -ImageReferenceSku "24_04-lts-gen2" `
+  -ImageReferenceVersion "latest"
 
 
 # Hálózati beállítás
 $vnet = Get-AzVirtualNetwork -Name "mentor-vnet" -ResourceGroupName $resourceGroupName;
 $subnetId = ($vnet.Subnets|where{$_.Name -eq "frontend"}).Id ;
 $ipCfg = New-AzVmssIpConfig -Name "ipConfig" -SubnetId $subnetId -LoadBalancerBackendAddressPoolsId $lb.BackendAddressPools[0].Id -Primary;
+
 Add-AzVmssNetworkInterfaceConfiguration -VirtualMachineScaleSet $vmssConfig -Name "network-main" -Primary $True -IPConfiguration $IPCfg
 
 
 # Felhasználói bejelentkezés
-Set-AzVmssOsProfile -VirtualMachineScaleSet $vmssConfig -ComputerNamePrefix $uniqueId -AdminUsername $credential.UserName -AdminPassword $credential.Password
+Set-AzVmssOsProfile -VirtualMachineScaleSet $vmssConfig -ComputerNamePrefix $uniqueId -AdminUsername $credential.UserName -AdminPassword $credential.Password -CustomData $cloudConfigBase64
 
 
 # VMSS létrehozás
