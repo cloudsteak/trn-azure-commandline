@@ -48,6 +48,12 @@ az version
 az account list-locations --output table
 ```
 
+### Európai régiók listája
+
+```bash
+az account list-locations --query "[?contains(regionalDisplayName,'Europe')]" -o table
+```
+
 ### Virtuális gép méretek adott régióban
 
 ```bash
@@ -89,7 +95,6 @@ az vm create \
 
 ### Linux létrehozása egyedi script futtatással
 
-
 ```bash
 eroforrascsoport='mentorklub2025'
 regio='swedencentral'
@@ -115,7 +120,6 @@ az vm create \
 ```
 
 - Port nyitása létező VM-hez: `az vm open-port -g $eroforrascsoport -n $vmneve --port 80,443 --priority 300`
-
 
 ### Fájlmegosztás lépztehozása
 
