@@ -71,7 +71,7 @@ az vm list-sizes --location swedencentral --query "[?starts_with(name, 'Standard
 Linux VM létrehozása, SSH kulcs generálással és saját hálózattal
 
 ```bash
-eroforrascsoport='mentorklub2025'
+eroforrascsoport='mentorklub2026'
 regio='swedencentral'
 vmneve='LinuxServer01'
 vmmerete='Standard_B1s'
@@ -96,7 +96,7 @@ az vm create \
 ### Linux létrehozása egyedi script futtatással
 
 ```bash
-eroforrascsoport='mentorklub2025'
+eroforrascsoport='mentorklub2026'
 regio='swedencentral'
 vmneve='WebServer01'
 vmmerete='Standard_B1s'
@@ -133,13 +133,13 @@ share_name='k-meghajto'
 
 ```bash
 accountKey=$(az storage account keys list \
-  --resource-group mentorklub2025 \
-  --account-name mentorklub2025sa \
+  --resource-group mentorklub2026 \
+  --account-name mentorklub2026sa \
   --query "[0].value" -o tsv)
 
 az storage share create \
   --name $share_name \
-  --account-name mentorklub2025sa \
+  --account-name mentorklub2026sa \
   --account-key $accountKey
 ```
 
@@ -212,7 +212,7 @@ Get-AzVMSize -Location 'swedencentral' |
 ### Teljesen önálló VM létrehozása
 
 ```powershell
-$eroforrascsoport='mentorklub2025'
+$eroforrascsoport='mentorklub2026'
 $regio='Sweden Central'
 $vmneve='WinServer01'
 $vmmerete='Standard_D2s_v5'

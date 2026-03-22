@@ -25,7 +25,7 @@ az vm list -o table
 - Teljesen önálló VM létrehozása
 
 ```powershell
-$eroforrascsoport='mentorklub2025'
+$eroforrascsoport='mentorklub2026'
 $regio='Sweden Central'
 $vmneve='WinServer01'
 $vmmerete='Standard_D2s_v5'
@@ -58,7 +58,7 @@ _Egyéb PowerShell esetén:_
 Linux VM létrehozása, SSH kulcs generálással és saját hálózattal
 
 ```bash
-eroforrascsoport='mentorklub2025'
+eroforrascsoport='mentorklub2026'
 regio='swedencentral'
 vmneve='LinuxServer01'
 vmmerete='Standard_B1s'
@@ -87,11 +87,11 @@ az vm create \
 NSG nélküli gépek, létező VNET-be
 
 ```bash
-eroforrascsoport='mentorklub2025'
+eroforrascsoport='mentorklub2026'
 regio='swedencentral'
 vmneve='LinuxServer02'
 vmmerete='Standard_D2s_v3'
-vnet='mentorklub2025-vnet'
+vnet='mentorklub2026-vnet'
 subnet='alap'
 ```
 
@@ -116,14 +116,16 @@ az vm create \
 
 - VM létrehozás saját képfájlból
 
+_Megjegyzés: a képfájl létrehozása egy külön folyamat, ami nem része ennek a dokumentációnak._
+
 **Linux + Apache2**
 
 ```bash
-eroforrascsoport='mentorklub2025'
+eroforrascsoport='mentorklub2026'
 regio='swedencentral'
 vmneve='WebServer01'
 vmmerete='Standard_D2s_v3'
-vnet='mentorklub2025-vnet'
+vnet='mentorklub2026-vnet'
 subnet='alap'
 ```
 
@@ -149,11 +151,11 @@ az vm create \
 **Linux + Webszerver + SQL kapcsolat**
 
 ```bash
-eroforrascsoport='mentorklub2025'
+eroforrascsoport='mentorklub2026'
 regio='swedencentral'
 vmneve='WebServer02'
 vmmerete='Standard_D2s_v3'
-vnet='mentorklub2025-vnet'
+vnet='mentorklub2026-vnet'
 subnet='alap'
 ```
 

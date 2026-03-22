@@ -18,14 +18,46 @@ Get-AzVmss
 ```bash
 az vmss list -o table
 ```
+- VMSS létrehozás - egyszerű módszer (Azure CLI)
 
-- VMSS létrehozás - saját képfájlból
+> Az `az vmss create` automatikusan létrehozza a VNet, Public IP, Load Balancer és NSG erőforrásokat. Az NSG azonban **nem** nyitja meg automatikusan a 80-as portot — ezt utólag kell pótolni.
+
+```bash
+RG="mentorklub2026"
+LOC="swedencentral"
+VMSS="demo-vmss"
+
+az group create -n "$RG" -l "$LOC"
+
+az vmss create \
+  -g "$RG" \
+  -n "$VMSS" \
+  --image Ubuntu2204 \
+  --instance-count 2 \
+  --vm-sku Standard_B1s \
+  --admin-username azureuser \
+  --generate-ssh-keys \
+  --upgrade-policy-mode automatic \
+  --custom-data cloud-init.yaml
+```
+
+Majd az auto-generált NSG-re engedélyezzük a HTTP forgalmat:
+
+```bash
+az network nsg rule create -g "$RG" --nsg-name "${VMSS}NSG" \
+  -n "AllowHTTP" --priority 100 \
+  --destination-port-ranges 80 --protocol Tcp \
+  --access Allow --direction Inbound
+```
+
+---
+- VMSS létrehozás egyéni konfigurációval (PowerShell)
 
 1. Változók
 
 ```powershell
 # Változók definiálása
-$resourceGroupName = "mentorklub2025"
+$resourceGroupName = "mentorklub2026"
 $uniqueId = Get-Random
 $scaleSetName = ("$uniqueId" + "-vmss")
 $location = "Sweden Central"
@@ -172,15 +204,15 @@ Get-AzResource -TagValue "vmss egyedi azonosítója a fenti scriptből" | Remove
 
 ```powershell
 # VMSS letárolása
-$vmss = Get-AzVmss -ResourceGroupName "mentorklub2025" -VMScaleSetName "sajátvmss"
+$vmss = Get-AzVmss -ResourceGroupName "mentorklub2026" -VMScaleSetName "sajátvmss"
 
 # Kívánt VM számosság beállítása
 $vmss.sku.capacity = 3
-Update-AzVmss -ResourceGroupName "mentorklub2025" -Name "sajátvmss" -VirtualMachineScaleSet $vmss
+Update-AzVmss -ResourceGroupName "mentorklub2026" -Name "sajátvmss" -VirtualMachineScaleSet $vmss
 ```
 
 ```bash
-az vmss scale --name sajátvmss --new-capacity 3 --resource-group mentorklub2025 --verbose
+az vmss scale --name sajátvmss --new-capacity 3 --resource-group mentorklub2026 --verbose
 ```
 
 [<< Vissza](README.md)
