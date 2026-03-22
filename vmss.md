@@ -66,6 +66,7 @@ $location = "Sweden Central"
 2. Felhasználói fiók adatai.
 
 FONTOS:
+
 - Tiltott felhasználó nevek: administrator, root
 - Jelszó hossza minimum 12 karakter. Taertalmaznia kell: kis betű, nagy betű, szám, speciális karakter
 

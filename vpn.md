@@ -14,7 +14,7 @@ Példa beállytás:
 
 ### Tanúsítványok létrehozása
 
-1. Fő tanúsítvány:
+### Fő tanúsítvány
 
 ```PowerShell
 # Fájl neve: AzureRootCert.ps1
@@ -24,7 +24,7 @@ Példa beállytás:
 -CertStoreLocation “Cert:\CurrentUser\My” -KeyUsageProperty Sign -KeyUsage CertSign 
 ```
 
-2. Kliens tanúsítvány:
+### Kliens tanúsítvány
 
 ```PowerShell
 # Fájl neve: AzureClientCert.ps1

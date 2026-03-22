@@ -20,9 +20,9 @@ az vm list -o table
 
 ### VM létrehozás
 
-**PowerShell**
+#### PowerShell
 
-- Teljesen önálló VM létrehozása
+Teljesen önálló VM létrehozása
 
 ```powershell
 $eroforrascsoport='mentorklub2026'
@@ -53,7 +53,7 @@ _Egyéb PowerShell esetén:_
 
 - `Get-Credential` parancs bekéri a felhasználóevet és a hozzá tartozó jelszót. Ezt teljesen biztonságosan kezeli.
 
-**Azure-CLi**
+#### Azure CLI
 
 Linux VM létrehozása, SSH kulcs generálással és saját hálózattal
 
@@ -114,11 +114,11 @@ az vm create \
   --no-wait
 ```
 
-- VM létrehozás saját képfájlból
+### VM létrehozás saját képfájlból
 
 _Megjegyzés: a képfájl létrehozása egy külön folyamat, ami nem része ennek a dokumentációnak._
 
-**Linux + Apache2**
+#### Linux + Apache2
 
 ```bash
 eroforrascsoport='mentorklub2026'
@@ -148,7 +148,7 @@ az vm create \
   --image "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub-images/providers/Microsoft.Compute/galleries/MentorKlubImages/images/Ubuntu24-Apache2-TesztOldal/versions/2025.02.22"
 ```
 
-**Linux + Webszerver + SQL kapcsolat**
+#### Linux + Webszerver + SQL kapcsolat
 
 ```bash
 eroforrascsoport='mentorklub2026'
