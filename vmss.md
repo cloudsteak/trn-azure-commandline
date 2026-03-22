@@ -9,7 +9,7 @@
 
 ## Parancsok
 
-- VMSS lekérdezése
+### VMSS lekérdezése
 
 ```powershell
 Get-AzVmss
@@ -18,7 +18,8 @@ Get-AzVmss
 ```bash
 az vmss list -o table
 ```
-- VMSS létrehozás - egyszerű módszer (Azure CLI)
+
+### VMSS létrehozás - egyszerű módszer (Azure CLI)
 
 > Az `az vmss create` automatikusan létrehozza a VNet, Public IP, Load Balancer és NSG erőforrásokat. Az NSG azonban **nem** nyitja meg automatikusan a 80-as portot — ezt utólag kell pótolni.
 
@@ -50,8 +51,7 @@ az network nsg rule create -g "$RG" --nsg-name "${VMSS}NSG" \
   --access Allow --direction Inbound
 ```
 
----
-- VMSS létrehozás egyéni konfigurációval (PowerShell)
+### VMSS létrehozás egyéni konfigurációval (PowerShell)
 
 1. Változók
 
@@ -194,13 +194,17 @@ Write-Host "VMSS elérése: http://vmss$uniqueId.swedencentral.cloudapp.azure.co
 az vmss list -o table
 ```
 
-- VMSS törlése minden erőforrással együtt
+### VMSS törlése minden erőforrással együtt
 
 ```powershell
 Get-AzResource -TagValue "vmss egyedi azonosítója a fenti scriptből" | Remove-AzResource -Force
 ```
 
-- VMSS-ben a VM-ek számának módosítása
+```bash
+az group delete -n "$RG" --yes --no-wait
+```
+
+### VMSS-ben a VM-ek számának módosítása
 
 ```powershell
 # VMSS letárolása
