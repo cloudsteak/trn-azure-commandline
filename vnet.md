@@ -1,6 +1,7 @@
 # Virtuális hálózat parancsok
 
 [![Cloud Shell indítása](https://learn.microsoft.com/azure/cloud-shell/media/embed-cloud-shell/launch-cloud-shell-1.png)](https://shell.azure.com)
+
 ## Dokumentáció
 
 - PowerShell: https://learn.microsoft.com/hu-hu/azure/virtual-network/quick-create-powershell
@@ -8,7 +9,7 @@
 
 ## Parancsok
 
-- VNET lekérdezése
+### VNET lekérdezése
 
 ```powershell
 Get-AzVirtualNetwork
@@ -18,7 +19,7 @@ Get-AzVirtualNetwork
 az network vnet list
 ```
 
-- VNET létrehozás
+### VNET létrehozás
 
 ```powershell
 $rg = @{

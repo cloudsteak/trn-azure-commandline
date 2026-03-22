@@ -20,12 +20,12 @@ az vm list -o table
 
 ### VM létrehozás
 
-**PowerShell**
+#### PowerShell
 
-- Teljesen önálló VM létrehozása
+Teljesen önálló VM létrehozása
 
 ```powershell
-$eroforrascsoport='mentorklub2025'
+$eroforrascsoport='mentorklub2026'
 $regio='Sweden Central'
 $vmneve='WinServer01'
 $vmmerete='Standard_D2s_v5'
@@ -53,12 +53,12 @@ _Egyéb PowerShell esetén:_
 
 - `Get-Credential` parancs bekéri a felhasználóevet és a hozzá tartozó jelszót. Ezt teljesen biztonságosan kezeli.
 
-**Azure-CLi**
+#### Azure CLI
 
 Linux VM létrehozása, SSH kulcs generálással és saját hálózattal
 
 ```bash
-eroforrascsoport='mentorklub2025'
+eroforrascsoport='mentorklub2026'
 regio='swedencentral'
 vmneve='LinuxServer01'
 vmmerete='Standard_B1s'
@@ -87,11 +87,11 @@ az vm create \
 NSG nélküli gépek, létező VNET-be
 
 ```bash
-eroforrascsoport='mentorklub2025'
+eroforrascsoport='mentorklub2026'
 regio='swedencentral'
 vmneve='LinuxServer02'
 vmmerete='Standard_D2s_v3'
-vnet='mentorklub2025-vnet'
+vnet='mentorklub2026-vnet'
 subnet='alap'
 ```
 
@@ -114,16 +114,18 @@ az vm create \
   --no-wait
 ```
 
-- VM létrehozás saját képfájlból
+### VM létrehozás saját képfájlból
 
-**Linux + Apache2**
+_Megjegyzés: a képfájl létrehozása egy külön folyamat, ami nem része ennek a dokumentációnak._
+
+#### Linux + Apache2
 
 ```bash
-eroforrascsoport='mentorklub2025'
+eroforrascsoport='mentorklub2026'
 regio='swedencentral'
 vmneve='WebServer01'
 vmmerete='Standard_D2s_v3'
-vnet='mentorklub2025-vnet'
+vnet='mentorklub2026-vnet'
 subnet='alap'
 ```
 
@@ -146,14 +148,14 @@ az vm create \
   --image "/subscriptions/3a1ff985-e6aa-44a8-ad61-a6827fa6f92a/resourceGroups/mentorklub-images/providers/Microsoft.Compute/galleries/MentorKlubImages/images/Ubuntu24-Apache2-TesztOldal/versions/2025.02.22"
 ```
 
-**Linux + Webszerver + SQL kapcsolat**
+#### Linux + Webszerver + SQL kapcsolat
 
 ```bash
-eroforrascsoport='mentorklub2025'
+eroforrascsoport='mentorklub2026'
 regio='swedencentral'
 vmneve='WebServer02'
 vmmerete='Standard_D2s_v3'
-vnet='mentorklub2025-vnet'
+vnet='mentorklub2026-vnet'
 subnet='alap'
 ```
 

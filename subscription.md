@@ -4,11 +4,11 @@
 
 ## Parancsok
 
-- Telepítés és Bejelentkezés
+### Telepítés és Bejelentlezés
 
 Ehhez a részhez a [README.md](README.md#telepítés-és-bejelentkezés)
 
-- Aktuális előfizetés
+### Aktuális előfizetés
 
 ```powershell
 Get-AzContext
@@ -22,7 +22,7 @@ Get-AzSubscription
 az account list -o table
 ```
 
-- Altuális előfizetés beállítása
+### Altuális előfizetés beállítása
 
 ```powershell
 Set-AzContext -Subscription 'xxxx-xxxx-xxxx-xxxx'
@@ -32,7 +32,7 @@ Set-AzContext -Subscription 'xxxx-xxxx-xxxx-xxxx'
 az account set -s 'xxxx-xxxx-xxxx-xxxx'
 ```
 
-- Régiók listázása
+### Régiók listázása
 
 ```powershell
 Get-AzLocation | select displayname,location
@@ -42,7 +42,7 @@ Get-AzLocation | select displayname,location
 az account list-locations --output table
 ```
 
-- Virtuálisgép méretek listázása adott régióban
+### Virtuálisgép méretek listázása adott régióban
 
 ```powershell
 Get-AzVMSize -Location 'régió'
@@ -52,7 +52,7 @@ Get-AzVMSize -Location 'régió'
 az vm list-sizes --location 'régió' -o table
 ```
 
-- Erőforráscsoport létrehozása adott régióban
+### Erőforráscsoport létrehozása adott régióban
 
 ```powershell
 New-AzResourceGroup -Location 'régió' -Name 'erőforráscsoport neve'
@@ -62,7 +62,7 @@ New-AzResourceGroup -Location 'régió' -Name 'erőforráscsoport neve'
 az group create 'erőforráscsoport neve' --location 'régió'
 ```
 
-- Szűrés, egyedi lekérdezés
+### Szűrés, egyedi lekérdezés
 
 ```powershell
 Get-AzSubscription | Select-Object Name, Id

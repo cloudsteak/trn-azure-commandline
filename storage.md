@@ -24,7 +24,7 @@ az storage account list -o table
 
 
 # Adatok beállítása
-$resourceGroup = "mentorklub2025"
+$resourceGroup = "mentorklub2026"
 $location = "Sweden Central"
 
 # Egyedi név generálása kisbetűkkel és számokkal
@@ -36,7 +36,7 @@ New-AzStorageAccount -ResourceGroupName $resourceGroup -Name $storageAccountName
 
 ```bash
 # Adatok beállítása
-resourceGroup="mentorklub2025"
+resourceGroup="mentorklub2026"
 location="swedencentral"
 
 # Egyedi név generálása kisbetűkkel és számokkal
