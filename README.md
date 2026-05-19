@@ -104,6 +104,8 @@ az -v
 az login
 ```
 
+*Megjegyzés:* Windows esetnémn inkább a `az login --tenant TENANT_ID` parancsot használjuk, ahol a TENAND_ID a Bérlő azonosítója.
+
 Ekkor ablakban megnyílik a bejelentkező felület, ahol be tudunk jelentkezni. Ha sikerül, akkor az ablak bezáródik és visszatérünk a terminál ablakba.
 
 ### Előfizetések listázása
