@@ -53,6 +53,8 @@ az network nsg rule create -g "$RG" --nsg-name "${VMSS}NSG" \
 
 ### VMSS létrehozás egyéni konfigurációval (PowerShell)
 
+A futtatható változat: [vmss-linux.ps1](vmss-linux.ps1). Indításkor bekéri a `resourceGroupName` és a `SkuCapacity` értékét, valamint a bejelentkezési adatokat, majd létrehozza az erőforráscsoportot, a virtuális hálózatot, a hálózati biztonsági csoportot, a terheléselosztót és a VMSS-t.
+
 1. Változók
 
 ```powershell
@@ -146,9 +148,9 @@ packages:
 
 write_files:
   - path: /tmp/index.html.tpl
-    permissions: '0644'
+    permissions: "0644"
     content: |
-      <html><head><style>body{font-family: Verdana, Geneva, Tahoma, sans-serif;background-image: url('https://github.com/cloudsteak/azurestaticwebsite/blob/main/assets/images/wallpaper-2025-01.jpeg?raw=true');background-repeat: no-repeat;background-size: cover; background-position: center;color: white; text-align: center; padding-top: 1%;}</style></head><body><h1>Web:<br>__HOSTNAME__</h1></body></html>
+      <html><head><style>body{font-family:Verdana,Geneva,Tahoma,sans-serif;margin:0;min-height:100vh;background:radial-gradient(circle at 20% 20%,#4cc9f0,#4361ee 35%,#3a0ca3 70%,#10002b);color:#fff;text-align:center;display:grid;place-items:center}</style></head><body><h1>Web:<br />__HOSTNAME__</h1></body></html>
 
 runcmd:
   - systemctl disable --now nginx || true
@@ -164,8 +166,8 @@ $cloudConfigBase64 = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetB
 Set-AzVmssStorageProfile $vmssConfig `
   -OsDiskCreateOption FromImage `
   -ImageReferencePublisher "Canonical" `
-  -ImageReferenceOffer "0001-com-ubuntu-server-noble" `
-  -ImageReferenceSku "24_04-lts-gen2" `
+  -ImageReferenceOffer "ubuntu-24_04-lts" `
+  -ImageReferenceSku "server" `
   -ImageReferenceVersion "latest"
 
 
@@ -193,6 +195,30 @@ Write-Host "VMSS elérése: http://vmss$uniqueId.swedencentral.cloudapp.azure.co
 
 ```bash
 az vmss list -o table
+```
+
+### Csatlakozás a VMSS-ben lévő szerverpéldányokhoz
+
+A cím a szkript végén kiírt terheléselosztó címe, `http://` nélkül.
+
+#### Management port-on (ssh - 22)
+
+A belépés felhasználónévvel és jelszóval történik. Ezeket a létrehozáskor a `Get-Credential` kérte be.
+
+Minden példány saját külső portot kap. Az első a **45100**, a második a **45101**, és így tovább.
+
+```bash
+ssh -p 45100 felhasznalonev@vmss12345.swedencentral.cloudapp.azure.com
+```
+
+Az `ssh` ezután kéri a jelszót.
+
+#### Web protokollon (http - 80)
+
+Az egyes példányok saját weboldala a **45000**-es porttól kezdődik. Az első a **45000**, a második a **45001**, és így tovább. A 80-as port a közös, terheléselosztott cím.
+
+```text
+http://vmss12345.swedencentral.cloudapp.azure.com:45000
 ```
 
 ### VMSS törlése minden erőforrással együtt
