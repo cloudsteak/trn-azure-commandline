@@ -246,4 +246,68 @@ Update-AzVmss -ResourceGroupName "mentorklub2026" -Name "sajátvmss" -VirtualMac
 az vmss scale --name sajátvmss --new-capacity 3 --resource-group mentorklub2026 --verbose
 ```
 
+### SSH kulcs utólagos hozzáadása
+
+Meglévő nyilvános kulcsot töltünk fel, új kulcsot nem generálunk. A `publikusKulcs` egy már kész `.pub` fájl, például `~/.ssh/id_rsa.pub`. A felhasználónév az, amit a `Get-Credential` kért. A jelszavas belépés megmarad.
+
+```bash
+RG="mentorklub2026"
+VMSS="sajátvmss"
+FELHASZNALO="felhasznalonev"
+PUBLIKUS_KULCS="$HOME/.ssh/id_rsa.pub"
+```
+
+```bash
+cat > ssh-key.json <<EOF
+{
+  "username": "$FELHASZNALO",
+  "ssh_key": "$(cat "$PUBLIKUS_KULCS")"
+}
+EOF
+```
+
+```bash
+az vmss extension set \
+  --resource-group "$RG" \
+  --vmss-name "$VMSS" \
+  --name VMAccessForLinux \
+  --publisher Microsoft.OSTCExtensions \
+  --version 1.5 \
+  --protected-settings ssh-key.json
+```
+
+```bash
+az vmss update-instances \
+  --resource-group "$RG" \
+  --name "$VMSS" \
+  --instance-ids "*"
+```
+
+```powershell
+$eroforrascsoport = "mentorklub2026"
+$vmssneve = "sajátvmss"
+$felhasznalo = "felhasznalonev"
+$publikusKulcs = "$HOME/.ssh/id_rsa.pub"
+
+$sshKey = (Get-Content -Path $publikusKulcs -Raw).Trim()
+$vmss = Get-AzVmss -ResourceGroupName $eroforrascsoport -VMScaleSetName $vmssneve
+
+Add-AzVmssExtension `
+    -VirtualMachineScaleSet $vmss `
+    -Name "VMAccessForLinux" `
+    -Publisher "Microsoft.OSTCExtensions" `
+    -Type "VMAccessForLinux" `
+    -TypeHandlerVersion "1.5" `
+    -ProtectedSetting @{ username = $felhasznalo; ssh_key = $sshKey }
+
+Update-AzVmss -ResourceGroupName $eroforrascsoport -Name $vmssneve -VirtualMachineScaleSet $vmss
+Update-AzVmssInstance -ResourceGroupName $eroforrascsoport -VMScaleSetName $vmssneve -InstanceId "*"
+```
+
+Ezután a meglévő privát kulccsal is lehet belépni:
+
+```bash
+ssh -i "${PUBLIKUS_KULCS%.pub}" -p 45100 "$FELHASZNALO"@vmss12345.swedencentral.cloudapp.azure.com
+```
+
 [<< Vissza](README.md)
