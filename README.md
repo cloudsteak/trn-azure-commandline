@@ -136,6 +136,16 @@ Get-AzResourceGroup
 az group list
 ```
 
+- Erőforráscsoportok lekérdezése listában
+
+```powershell
+Get-AzResourceGroup | Format-Table
+```
+
+```bash
+az group list -o table
+```
+
 - Virtuális hálózatok lekérdezése
 
 ```powershell
