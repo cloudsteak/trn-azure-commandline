@@ -96,10 +96,6 @@ subnet='alap'
 ```
 
 ```bash
-az group create -l $regio -n $eroforrascsoport
-```
-
-```bash
 az vm create \
   --resource-group $eroforrascsoport \
   --name $vmneve \
@@ -112,6 +108,28 @@ az vm create \
   --size $vmmerete \
   --public-ip-sku Standard \
   --no-wait
+```
+
+### Létező gép hozzáadása létező NSG-hez
+
+Az NSG a virtuális gép hálózati kártyájához (NIC) kapcsolódik. A név elég, ha az NSG ugyanabban az erőforráscsoportban van, mint a gép.
+
+```bash
+eroforrascsoport='mentorklub2026'
+vmneve='LinuxServer02'
+nsg='LinuxServer01-nsg'
+```
+
+```bash
+nicid=$(az vm show \
+  --resource-group $eroforrascsoport \
+  --name $vmneve \
+  --query "networkProfile.networkInterfaces[0].id" \
+  -o tsv)
+
+az network nic update \
+  --ids $nicid \
+  --network-security-group $nsg
 ```
 
 ### VM létrehozás saját képfájlból
